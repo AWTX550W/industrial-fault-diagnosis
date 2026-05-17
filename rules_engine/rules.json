@@ -1,0 +1,131 @@
+{
+  "rules": [
+    {
+      "name": "轴承内圈故障-振动+噪声",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["振动", "噪声", "温度升高"],
+          "match_type": "any",
+          "min_match": 2
+        }
+      ],
+      "conclusion": {
+        "fault_id": "BF001",
+        "confidence": 0.85,
+        "message": "可能存在轴承内圈故障"
+      }
+    },
+    {
+      "name": "轴承内圈故障-单一振动",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["振动", "轴承"],
+          "match_type": "all"
+        }
+      ],
+      "conclusion": {
+        "fault_id": "BF001",
+        "confidence": 0.6,
+        "message": "轴承相关振动异常，可能是内圈故障"
+      }
+    },
+    {
+      "name": "轴承外圈故障",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["噪声", "外圈", "不平稳"],
+          "match_type": "any",
+          "min_match": 1
+        }
+      ],
+      "conclusion": {
+        "fault_id": "BF002",
+        "confidence": 0.7,
+        "message": "可能存在轴承外圈故障"
+      }
+    },
+    {
+      "name": "轴承润滑不良",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["润滑", "温度升高", "噪声", "摩擦", "不良", "干磨"],
+          "match_type": "any",
+          "min_match": 1
+        }
+      ],
+      "conclusion": {
+        "fault_id": "BF004",
+        "confidence": 0.8,
+        "message": "可能存在轴承润滑不良问题"
+      }
+    },
+    {
+      "name": "电机过热",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["过热", "温度", "电流", "异味"],
+          "match_type": "any",
+          "min_match": 2
+        }
+      ],
+      "conclusion": {
+        "fault_id": "MF001",
+        "confidence": 0.85,
+        "message": "可能存在电机过热问题"
+      }
+    },
+    {
+      "name": "电机振动异常",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["振动", "松动", "不对中"],
+          "match_type": "any",
+          "min_match": 1
+        }
+      ],
+      "conclusion": {
+        "fault_id": "MF002",
+        "confidence": 0.7,
+        "message": "可能存在电机振动异常，检查转子和安装"
+      }
+    },
+    {
+      "name": "电机绕组故障",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["绕组", "短路", "绝缘", "烧焦"],
+          "match_type": "any",
+          "min_match": 1
+        }
+      ],
+      "conclusion": {
+        "fault_id": "MF003",
+        "confidence": 0.85,
+        "message": "可能存在电机绕组故障"
+      }
+    },
+    {
+      "name": "电机启动困难",
+      "conditions": [
+        {
+          "type": "keyword",
+          "keywords": ["启动", "困难", "无法启动", "停转"],
+          "match_type": "any",
+          "min_match": 1
+        }
+      ],
+      "conclusion": {
+        "fault_id": "MF005",
+        "confidence": 0.8,
+        "message": "可能存在电机启动问题"
+      }
+    }
+  ]
+}

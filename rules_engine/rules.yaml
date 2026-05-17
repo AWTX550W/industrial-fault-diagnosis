@@ -1,0 +1,125 @@
+# 故障诊断规则定义
+# 每条规则包含：名称、关键词条件、匹配模式、结论
+
+rules:
+  # ===== 轴承故障规则 =====
+  - name: "轴承内圈故障-振动+噪声"
+    conditions:
+      - type: "keyword"
+        keywords: ["振动", "噪声", "温度升高"]
+        match_type: "any"
+        min_match: 2
+    conclusion:
+      fault_id: "BF001"
+      confidence: 0.85
+      message: "可能存在轴承内圈故障"
+
+  - name: "轴承内圈故障-单一振动"
+    conditions:
+      - type: "keyword"
+        keywords: ["振动", "轴承"]
+        match_type: "all"
+    conclusion:
+      fault_id: "BF001"
+      confidence: 0.6
+      message: "轴承相关振动异常，可能是内圈故障"
+
+  - name: "轴承外圈故障"
+    conditions:
+      - type: "keyword"
+        keywords: ["噪声", "外圈", "不平稳"]
+        match_type: "any"
+        min_match: 1
+    conclusion:
+      fault_id: "BF002"
+      confidence: 0.7
+      message: "可能存在轴承外圈故障"
+
+  - name: "轴承润滑不良"
+    conditions:
+      - type: "keyword"
+        keywords: ["温度升高", "噪声", "摩擦"]
+        match_type: "any"
+        min_match: 2
+    conclusion:
+      fault_id: "BF004"
+      confidence: 0.8
+      message: "可能存在轴承润滑不良问题"
+
+  - name: "滚动体故障"
+    conditions:
+      - type: "keyword"
+        keywords: ["不规则振动", "波动", "间歇"]
+        match_type: "any"
+        min_match: 1
+    conclusion:
+      fault_id: "BF003"
+      confidence: 0.65
+      message: "可能存在滚动体或保持架故障"
+
+  - name: "轴承腐蚀"
+    conditions:
+      - type: "keyword"
+        keywords: ["腐蚀", "锈", "水分"]
+        match_type: "any"
+        min_match: 1
+    conclusion:
+      fault_id: "BF005"
+      confidence: 0.75
+      message: "可能存在轴承腐蚀问题"
+
+  # ===== 电机故障规则 =====
+  - name: "电机过热"
+    conditions:
+      - type: "keyword"
+        keywords: ["过热", "温度", "电流", "异味"]
+        match_type: "any"
+        min_match: 2
+    conclusion:
+      fault_id: "MF001"
+      confidence: 0.85
+      message: "可能存在电机过热问题"
+
+  - name: "电机振动异常"
+    conditions:
+      - type: "keyword"
+        keywords: ["振动", "松动", "不对中"]
+        match_type: "any"
+        min_match: 1
+    conclusion:
+      fault_id: "MF002"
+      confidence: 0.7
+      message: "可能存在电机振动异常，检查转子和安装"
+
+  - name: "电机绕组故障"
+    conditions:
+      - type: "keyword"
+        keywords: ["绕组", "短路", "绝缘", "烧焦"]
+        match_type: "any"
+        min_match: 1
+    conclusion:
+      fault_id: "MF003"
+      confidence: 0.85
+      message: "可能存在电机绕组故障"
+
+  - name: "电机启动困难"
+    conditions:
+      - type: "keyword"
+        keywords: ["启动", "困难", "无法启动", "停转"]
+        match_type: "any"
+        min_match: 1
+    conclusion:
+      fault_id: "MF005"
+      confidence: 0.8
+      message: "可能存在电机启动问题"
+
+  - name: "电机轴承故障"
+    conditions:
+      - type: "keyword"
+        keywords: ["电机", "轴承", "噪声", "摩擦"]
+        match_type: "any"
+        min_match: 2
+    conclusion:
+      fault_id: "MF004"
+      confidence: 0.75
+      message: "可能存在电机轴承故障"
